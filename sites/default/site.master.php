@@ -63,7 +63,7 @@ $conf['master_modules'] = array(
     'statistics',
     'strongarm',
     'subpathauto',
-    'swiftype',
+    'swiftype_integration',
     'taxonomy',
     'taxonomy_menu',
     'tracker',

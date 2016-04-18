@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * The Remove RON Module.
+ *
+ * Removes the /node path and page from your website, forever. https://www.youtube.com/watch?v=H-Q7b-vHY3Q
+ * 
+ */
+ 
+/**
+ * Implementation of hook_menu_alter().
+ */
+function remove_ron_menu_alter(&$items) {
+    unset($items['node']);
+}
