@@ -1,0 +1,462 @@
+<?php
+
+/** This is a @file */
+
+include_once('feeds_article.features.inc');
+include_once('feeds_article.weightings.inc');
+
+
+function feeds_article_menu() {
+
+  $items = array();
+
+  $items['admin/rescore'] = array(
+    'page callback' => 'feeds_article_rescore_wrapper',
+    'access arguments' => array('administer nodes'),
+  );
+
+  $items['admin/rescore/all'] = array(
+    'page callback' => 'feeds_article_rescore_all_wrapper',
+    'access arguments' => array('administer nodes'),
+  );
+
+  return $items;
+
+}
+
+
+function feeds_article_node_presave($node) {
+
+  if (($node->log == 'Created by FeedsNodeProcessor') ||
+    (@$node->field_rescore[LANGUAGE_NONE][0]['value'] == 1))
+//   if ($node->type == 'article')
+    feeds_article_score($node);
+
+}
+
+
+function feeds_article_score($node) {
+
+// not an imported article?  just decrement score and return
+  if (!isset($node->field_imported_description[LANGUAGE_NONE][0]['value']) &&
+    (trim($node->body[LANGUAGE_NONE][0]['value']) != '')) {
+
+    $relevance_decay = (int) ((time() - $node->created) / 1800);
+    $score = 100 - $relevance_decay;
+
+    $node->field_score = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => $score,
+        ),
+      ),
+    );
+// drupal_set_message(t('Score for %title is now %score',
+//   array('%title' => $node->title, '%score' => $score)));
+
+    return;
+
+  }
+
+// check relevance
+
+  $allowed_tags = explode(' ',
+    'em strong cite blockquote code ul ol li dl dt dd p br big h2');
+
+  $weightings = feeds_article_get_weightings();
+
+  $text_only = strip_tags(
+    @$node->field_imported_description[LANGUAGE_NONE][0]['value'], ''
+  );
+
+  $title_text_only = strip_tags(
+    $node->field_imported_title[LANGUAGE_NONE][0]['value'], ''
+  );
+
+// generate score for each section based on term ranking
+
+  if (@$node->field_rescore[LANGUAGE_NONE][0]['value'] == 1) { // rescoring
+    drupal_set_message(t('Rescoring: old relevance was %relevance, %section.',
+      array('%relevance' => @$node->field_highest_relevance
+        [LANGUAGE_NONE][0]['value'],
+        '%section' => @$node->field_highest_relevance_section
+        [LANGUAGE_NONE][0]['value'])));
+  }
+
+  $scores = array();
+  $log = '';
+
+  foreach ($weightings as $section => $weighting) {
+
+    $scores[$section] = 0;
+    $log_terms = '';
+
+    foreach ($weighting as $term => $weight) {
+
+// title matches
+      $matches = array();
+      preg_match_all('/\b' . $term . '\b/i', $title_text_only, $matches,
+        PREG_OFFSET_CAPTURE);
+      $num_matches = sizeof($matches[0]);
+
+      if ($num_matches > 0) {
+
+        $extra_weight = min(25, $num_matches * $weight * 3);
+        $scores[$section] += $extra_weight;
+        $log_terms .= $extra_weight . ': ' . $term . ' (title)';
+
+        ($num_matches > 1) && $log_terms .= ' x ' . $num_matches;
+
+        $log_terms .= "\n";
+
+      } // any matches?
+
+// body matches
+      $matches = array();
+      preg_match_all('/\b' . $term . '\b/i', $text_only, $matches,
+        PREG_OFFSET_CAPTURE);
+      $num_matches = sizeof($matches[0]);
+
+      if ($num_matches > 0) {
+
+        $extra_weight = min(25, $num_matches * $weight);
+        $scores[$section] += $extra_weight;
+        $log_terms .= $extra_weight . ': ' . $term;
+
+        ($num_matches > 1) && $log_terms .= ' x ' . $num_matches;
+
+        $log_terms .= "\n";
+
+      } // any matches?
+
+    } // foreach term
+
+    $log .= 'Section ' . $section . ' (score: ' . $scores[$section] . ")\n"
+    . $log_terms . "\n";
+
+  } // foreach section
+
+  $log .= "Raw text\n------------\n\n" . $text_only;
+
+  $node->field_relevance_log = array(
+    LANGUAGE_NONE => array(
+      0 => array(
+        'value' => $log,
+      ),
+    ),
+  );
+
+// save highest relevance
+
+  $relevance = -9999;
+  $relevance_section = 'More';
+
+  foreach ($scores as $section => $score) {
+
+    if ($score > $relevance) {
+
+      $relevance = $score;
+      $relevance_section = $section;
+
+    }
+
+  }
+
+  if (@$node->field_rescore[LANGUAGE_NONE][0]['value'] == 1) { // rescoring
+    drupal_set_message(t('Rescoring: new relevance is %relevance, %section.',
+      array('%relevance' => $relevance,
+        '%section' => $relevance_section)));
+  }
+
+  $node->field_highest_relevance = array(
+    LANGUAGE_NONE => array(
+      0 => array(
+        'value' => $relevance,
+      ),
+    ),
+  );
+
+  $node->field_highest_relevance_section = array(
+    LANGUAGE_NONE => array(
+      0 => array(
+        'value' => $relevance_section,
+      ),
+    ),
+  );
+
+  if ((empty($node->field_imported_date)) ||
+    (empty($node->field_imported_date[LANGUAGE_NONE])))
+    $node->field_imported_date = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => time()
+        )
+      )
+    );
+
+  $relevance_decay = (int) ((time() -
+    $node->field_imported_date[LANGUAGE_NONE][0]['value']) / 1800);
+
+//   $relevance_decay = (int) ((time() - $node->published_at) / 3600);
+
+  $score = $relevance - $relevance_decay;
+
+  $node->field_score = array(
+    LANGUAGE_NONE => array(
+      0 => array(
+        'value' => $score,
+      ),
+    ),
+  );
+
+// save section
+
+  $section_tids = array_values(
+    taxonomy_get_term_by_name($relevance_section, 'sections')
+  );
+
+  if (count($section_tids) > 0) {
+
+    $node->field_section = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'tid' => $section_tids[0]->tid,
+        ),
+      ),
+    );
+  }
+
+
+// save URL
+
+  $node->field_more_info_link = $node->field_imported_url;
+
+// save title
+
+  $node->title = strip_tags(
+    $node->field_imported_title[LANGUAGE_NONE][0]['value'], ''
+  );
+
+// delete log
+
+  $node->log = 'Scored';
+  $node->field_rescore = array();
+
+// save body
+
+  $node->body = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => filter_xss(
+            decode_entities(
+              @$node->field_imported_description[LANGUAGE_NONE][0]['value']
+            ),
+            $allowed_tags),
+          'format' => 'limited_html',
+        ),
+      ),
+    );
+
+// publish or promote?
+
+  if ($relevance > variable_get('score_to_publish', 10)) $node->status = 1;
+  $node->promote = ($score > variable_get('score_to_promote', 10)) ? 1 : 0;
+
+//     dpm($node, $node->title);
+
+}
+
+
+function feeds_article_cron() {
+
+  return feeds_article_rescore();
+
+}
+
+
+function feeds_article_rescore($all = FALSE) {
+
+  if ($all) { // rescore all nodes
+
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'article')
+      ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $articles = entity_load('node', $nids);
+    }
+
+  } else { // only rescore recent or positive
+
+    $articles1 = $articles2 = array();
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'article')
+      ->fieldCondition('field_imported_date', 'value', time() - 345600, '>')
+  //    ->addTag('imported_in_last_four_days')
+      ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $articles1 = entity_load('node', $nids);
+    }
+
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'article')
+      ->fieldCondition('field_score', 'value', 0, '>')
+      ->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $articles2 = entity_load('node', $nids);
+    }
+
+    $articles = (array) $articles1 + (array) $articles2;
+  // @FIXME: write a proper query with an OR condition
+
+  }
+
+  if (count($articles) > 0) {
+
+    drupal_set_message(
+      t('%num nodes are still alive.', array('%num' => count($articles)))
+    );
+
+    $pub = $prom = $pos = 0;
+
+    foreach ($articles as $node) {
+
+      feeds_article_score($node);
+      $pub += $node->status;
+      $prom += $node->promote;
+      ($node->field_score[LANGUAGE_NONE][0]['value'] > 0) && $pos++;
+      node_save($node);
+
+    }
+
+    drupal_set_message(
+      t('%pub nodes published, %prom nodes promoted, %pos nodes score positive',
+        array('%pub' => $pub, '%prom' => $prom, '%pos' => $pos))
+    );
+
+  } else {
+
+    drupal_set_message(t('No nodes are still alive.'));
+
+  }
+
+}
+
+
+function feeds_article_rescore_wrapper() {
+
+  feeds_article_rescore();
+  drupal_set_message('Article rescore completed.');
+  return 'Article rescore completed.';
+
+}
+
+
+function feeds_article_rescore_all_wrapper() {
+
+  feeds_article_rescore(TRUE);
+  drupal_set_message('ALL Article rescore completed.');
+  return 'ALL Article rescore completed.';
+
+}
+
+
+/**
+ * Alter mapping sources.
+ *
+ * Use this hook to add additional mapping sources for any parser. Allows for
+ * registering a callback to be invoked at mapping time.
+ *
+ * @see my_source_get_source().
+ * @see locale_feeds_parser_sources_alter().
+ */
+function feeds_article_feeds_parser_sources_alter(&$sources, $content_type) {
+
+  $sources['feeds_article_feed_source'] = array(
+    'name' => t('Feed source title'),
+    'description' => t('Title of the feed from which this element came.'),
+    'callback' => 'feeds_article_get_feeds_source',
+  );
+
+  $sources['feeds_article_feed_source_link'] = array(
+    'name' => t('Feed source link'),
+    'description' => t('Link to the feed from which this element came.'),
+    'callback' => 'feeds_article_get_feeds_source_link',
+  );
+
+  $sources['feeds_article_current_time'] = array(
+    'name' => t('Current Time'),
+    'description' => t('Current time at the point of import'),
+    'callback' => 'feeds_article_get_current_time',
+  );
+
+}
+
+
+/**
+ * Example callback specified in hook_feeds_parser_sources_alter().
+ *
+ * To be invoked on mapping time.
+ *
+ * @param $source
+ *   The FeedsSource object being imported.
+ * @param $result
+ *   The FeedsParserResult object being mapped from.
+ * @param $key
+ *   The key specified in the $sources array in
+ *   hook_feeds_parser_sources_alter().
+ *
+ * @return
+ *   The value to be extracted from the source.
+ *
+ * @see hook_feeds_parser_sources_alter()
+ * @see locale_feeds_get_source()
+ */
+function feeds_article_get_feeds_source(FeedsSource $source,
+  FeedsParserResult $result, $key) {
+
+  return strip_tags($result->title, '');
+
+}
+
+
+/**/
+function feeds_article_get_feeds_source_link(FeedsSource $source,
+  FeedsParserResult $result, $key) {
+
+  return $result->link;
+
+}
+
+
+function feeds_article_get_current_time(FeedsSource $source,
+  FeedsParserResult $result, $key) {
+
+  return time();
+
+}
+
+
+function feeds_article_query_published_in_last_four_days_alter($query) {
+
+  $query->join('publication_date', 'pd', '%alias.nid = node.nid');
+  $query->condition('pd.published_at', time() - 345600000, '>');
+
+}

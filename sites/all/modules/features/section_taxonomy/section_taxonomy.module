@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Section Taxonomy feature.
+ */
+
+include_once 'section_taxonomy.features.inc';

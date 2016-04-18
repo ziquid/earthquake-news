@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * Code for the Basic Configuration feature.
+ */
+
+include_once 'basic_config.features.inc';
+
+
+function basic_config_image_styles_alter(&$styles) {
+
+  if ($styles['media_thumbnail']['storage'] == IMAGE_STORAGE_DEFAULT) {
+
+    $styles['media_thumbnail']['label'] = 'Media thumbnail (120x180)';
+    $styles['media_thumbnail']['effects'][0]['data'] =
+      array('width' => 120, 'height' => 180);
+
+  }
+
+}

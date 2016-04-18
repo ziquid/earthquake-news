@@ -1,0 +1,35 @@
+<?php
+
+/** this is a @file */
+
+function basic_config_update_7001() {
+
+  theme_enable(array('gdg'));
+
+}
+
+
+/**
+ * Create the 'feed_fetcher' user
+ */
+function basic_config_update_7002() {
+
+// enable 'feed fetcher' user
+
+  $password = user_password(8);
+  $fields = array(
+    'name' => 'feed_fetcher',
+    'mail' => 'noreply@example.com',
+    'pass' => $password,
+    'status' => 1,
+    'init' => 'email address',
+    'roles' => array(
+      DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+      4 => 'Contributor',
+    ),
+  );
+
+  //the first parameter is left blank so a new user is created
+  $account = user_save(NULL, $fields);
+
+}
