@@ -39,7 +39,7 @@ projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.9"
 
 projects[codefilter][subdir] = "contrib"
-projects[codefilter][version] = "1.1"
+projects[codefilter][version] = "1.2"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
@@ -65,7 +65,7 @@ projects[ds][subdir] = "contrib"
 projects[ds][version] = "2.13"
 
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "1.6"
+projects[entity][version] = "1.7"
 
 projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.1"
@@ -74,7 +74,7 @@ projects[exif_custom][subdir] = "contrib"
 projects[exif_custom][version] = "1.14"
 
 projects[features][subdir] = "contrib"
-projects[features][version] = "2.7"
+projects[features][version] = "2.9"
 
 projects[feeds][subdir] = "contrib"
 projects[feeds][version] = "2.0-beta2"
@@ -110,7 +110,7 @@ projects[globalredirect][subdir] = "contrib"
 projects[globalredirect][version] = "1.5"
 
 projects[imagecache_token][subdir] = "contrib"
-projects[imagecache_token][version] = "1.x-dev"
+projects[imagecache_token][version] = "1.0-rc2"
 
 projects[jcarousel][subdir] = "contrib"
 projects[jcarousel][version] = "2.7"
@@ -143,7 +143,7 @@ projects[menu_trail_by_path][subdir] = "contrib"
 projects[menu_trail_by_path][version] = "2.0"
 
 projects[metatag][subdir] = "contrib"
-projects[metatag][version] = "1.13"
+projects[metatag][version] = "1.14"
 
 projects[multiform][subdir] = "contrib"
 projects[multiform][version] = "1.1"
@@ -217,13 +217,13 @@ projects[xmlsitemap][version] = "2.2"
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
 
-projects[fitness_bootstrap_less][download][type] = ""
-projects[fitness_bootstrap_less][download][url] = ""
-projects[fitness_bootstrap_less][type] = "theme"
-projects[fitness_bootstrap_less][subdir] = "custom"
+projects[earthquake_news][download][type] = ""
+projects[earthquake_news][download][url] = ""
+projects[earthquake_news][type] = "theme"
+projects[earthquake_news][subdir] = "custom"
 
 projects[bootstrap][subdir] = "contrib"
-projects[bootstrap][version] = "3.4"
+projects[bootstrap][version] = "3.5"
 
 ; Libraries
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
