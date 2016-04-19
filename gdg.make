@@ -109,6 +109,9 @@ projects[google_analytics][version] = "2.1"
 projects[globalredirect][subdir] = "contrib"
 projects[globalredirect][version] = "1.5"
 
+projects[htmlpurifier][subdir] = "contrib"
+projects[htmlpurifier][version] = "1.0"
+
 projects[imagecache_token][subdir] = "contrib"
 projects[imagecache_token][version] = "1.0-rc2"
 
@@ -239,6 +242,11 @@ libraries[geshi][download][type] = ""
 libraries[geshi][download][url] = ""
 libraries[geshi][directory_name] = "geshi"
 libraries[geshi][type] = "library"
+
+libraries[htmlpurifier][download][type] = "get"
+libraries[htmlpurifier][download][url] = "http://htmlpurifier.org/releases/htmlpurifier-4.7.0.tar.gz"
+libraries[htmlpurifier][directory_name] = "htmlpurifier"
+libraries[htmlpurifier][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.

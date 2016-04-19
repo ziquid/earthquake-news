@@ -3,6 +3,7 @@
 /** This is a @file */
 
 include_once('feeds_article.features.inc');
+include_once('feeds_article.scoring.inc');
 include_once('feeds_article.weightings.inc');
 
 
@@ -30,18 +31,18 @@ function feeds_article_node_presave($node) {
   if (($node->log == 'Created by FeedsNodeProcessor') ||
     (@$node->field_rescore[LANGUAGE_NONE][0]['value'] == 1))
 //   if ($node->type == 'article')
-    feeds_article_score($node);
+    feeds_article_score_node($node);
 
 }
 
 
-function feeds_article_score($node) {
+function feeds_article_score_node($node) {
 
 // not an imported article?  just decrement score and return
   if (!isset($node->field_imported_description[LANGUAGE_NONE][0]['value']) &&
     (trim($node->body[LANGUAGE_NONE][0]['value']) != '')) {
 
-    $relevance_decay = (int) ((time() - $node->created) / 1800);
+    $relevance_decay = (int) ((time() - $node->created) / 9000);
     $score = 100 - $relevance_decay;
 
     $node->field_score = array(
@@ -55,15 +56,24 @@ function feeds_article_score($node) {
 //   array('%title' => $node->title, '%score' => $score)));
 
     return;
-
   }
 
-// check relevance
+  if ((empty($node->field_imported_date)) ||
+  (empty($node->field_imported_date[LANGUAGE_NONE])))
+    $node->field_imported_date = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => time()
+        )
+      )
+    );
 
-  $allowed_tags = explode(' ',
-    'em strong cite blockquote code ul ol li dl dt dd p br big h2');
-
-  $weightings = feeds_article_get_weightings();
+  if (@$node->field_rescore[LANGUAGE_NONE][0]['value'] == 1) // rescoring
+    drupal_set_message(t('Rescoring: old relevance was %relevance, %section.',
+      array('%relevance' => @$node->field_highest_relevance
+        [LANGUAGE_NONE][0]['value'],
+        '%section' => @$node->field_highest_relevance_section
+        [LANGUAGE_NONE][0]['value'])));
 
   $text_only = strip_tags(
     @$node->field_imported_description[LANGUAGE_NONE][0]['value'], ''
@@ -73,70 +83,10 @@ function feeds_article_score($node) {
     $node->field_imported_title[LANGUAGE_NONE][0]['value'], ''
   );
 
-// generate score for each section based on term ranking
-
-  if (@$node->field_rescore[LANGUAGE_NONE][0]['value'] == 1) { // rescoring
-    drupal_set_message(t('Rescoring: old relevance was %relevance, %section.',
-      array('%relevance' => @$node->field_highest_relevance
-        [LANGUAGE_NONE][0]['value'],
-        '%section' => @$node->field_highest_relevance_section
-        [LANGUAGE_NONE][0]['value'])));
-  }
-
   $scores = array();
-  $log = '';
+  $log = "Feed Import Score:\n\n";
 
-  foreach ($weightings as $section => $weighting) {
-
-    $scores[$section] = 0;
-    $log_terms = '';
-
-    foreach ($weighting as $term => $weight) {
-
-// title matches
-      $matches = array();
-      preg_match_all('/\b' . $term . '\b/i', $title_text_only, $matches,
-        PREG_OFFSET_CAPTURE);
-      $num_matches = sizeof($matches[0]);
-
-      if ($num_matches > 0) {
-
-        $extra_weight = min(25, $num_matches * $weight * 3);
-        $scores[$section] += $extra_weight;
-        $log_terms .= $extra_weight . ': ' . $term . ' (title)';
-
-        ($num_matches > 1) && $log_terms .= ' x ' . $num_matches;
-
-        $log_terms .= "\n";
-
-      } // any matches?
-
-// body matches
-      $matches = array();
-      preg_match_all('/\b' . $term . '\b/i', $text_only, $matches,
-        PREG_OFFSET_CAPTURE);
-      $num_matches = sizeof($matches[0]);
-
-      if ($num_matches > 0) {
-
-        $extra_weight = min(25, $num_matches * $weight);
-        $scores[$section] += $extra_weight;
-        $log_terms .= $extra_weight . ': ' . $term;
-
-        ($num_matches > 1) && $log_terms .= ' x ' . $num_matches;
-
-        $log_terms .= "\n";
-
-      } // any matches?
-
-    } // foreach term
-
-    $log .= 'Section ' . $section . ' (score: ' . $scores[$section] . ")\n"
-    . $log_terms . "\n";
-
-  } // foreach section
-
-  $log .= "Raw text\n------------\n\n" . $text_only;
+  feeds_article_score($title_text_only, '', $text_only, $scores, $log);
 
   $node->field_relevance_log = array(
     LANGUAGE_NONE => array(
@@ -146,21 +96,129 @@ function feeds_article_score($node) {
     ),
   );
 
-// save highest relevance
+  // save body
+  $allowed_tags = explode(' ',
+    'em strong cite blockquote code ul ol li dl dt dd p br big h2');
 
+  $node->body = array(
+    LANGUAGE_NONE => array(
+      0 => array(
+        'value' => filter_xss(
+          decode_entities(
+            @$node->field_imported_description[LANGUAGE_NONE][0]['value']
+          ),
+          $allowed_tags),
+        'format' => 'limited_html',
+      ),
+    ),
+  );
+
+  // save URL
+  $node->field_more_info_link = $node->field_imported_url;
+
+  // save highest relevance
   $relevance = -9999;
   $relevance_section = 'More';
 
   foreach ($scores as $section => $score) {
 
     if ($score > $relevance) {
-
       $relevance = $score;
       $relevance_section = $section;
-
     }
 
   }
+
+  // not highly relevant?  go to source and grab text ourselves
+  if (($relevance < 100)
+  && empty($node->field_pulled_url[LANGUAGE_NONE][0]['value'])) {
+
+    $doc = feeds_article_get_url(
+      $node->field_imported_url[LANGUAGE_NONE][0]['value']
+    );
+
+    // @FIXME: follow redirects and save actual URL in this field
+    $node->field_pulled_url = $node->field_imported_url;
+
+    $node->field_pulled_date = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => time()
+        ),
+      ),
+    );
+
+    $node->field_pulled_title = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => $doc->title
+        ),
+      ),
+    );
+
+    $node->field_pulled_description = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => $doc->description
+        ),
+      ),
+    );
+
+    $node->field_pulled_deck = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => $doc->deck
+        ),
+      ),
+    );
+
+    $node->field_pulled_body = array(
+      LANGUAGE_NONE => array(
+        0 => array(
+          'value' => $doc->text
+        ),
+      ),
+    );
+
+  } // pull source when needed
+
+  // do we have pulled source? score it too
+  if (isset($node->field_pulled_date)) {
+
+    // rescore this
+    $scores = array();
+    $log = "Pull Import Score:\n\n";
+
+    feeds_article_score($node->field_pulled_title[LANGUAGE_NONE][0]['value'],
+      $node->field_pulled_deck[LANGUAGE_NONE][0]['value'],
+      $node->field_pulled_body[LANGUAGE_NONE][0]['value'],
+      $scores, $log);
+
+    $node->field_relevance_log[LANGUAGE_NONE][] = array(
+      'value' => $log
+    );
+
+    // see if these scores are higher than the feed scores
+    $using_pull = FALSE;
+    foreach ($scores as $section => $score) {
+
+      if ($score > $relevance) {
+        $relevance = $score;
+        $relevance_section = $section;
+        $using_pull = TRUE;
+      }
+
+    }
+
+    if ($using_pull) { // pull wins? save deck and body
+      $node->field_deck = $node->field_pulled_deck;
+      $node->body = $node->field_pulled_body;
+      $node->body[LANGUAGE_NONE][0]['format'] = 'limited_html';
+
+    } // if using pull
+
+  } // rescore pulled text
+
 
   if (@$node->field_rescore[LANGUAGE_NONE][0]['value'] == 1) { // rescoring
     drupal_set_message(t('Rescoring: new relevance is %relevance, %section.',
@@ -184,18 +242,8 @@ function feeds_article_score($node) {
     ),
   );
 
-  if ((empty($node->field_imported_date)) ||
-    (empty($node->field_imported_date[LANGUAGE_NONE])))
-    $node->field_imported_date = array(
-      LANGUAGE_NONE => array(
-        0 => array(
-          'value' => time()
-        )
-      )
-    );
-
   $relevance_decay = (int) ((time() -
-    $node->field_imported_date[LANGUAGE_NONE][0]['value']) / 1800);
+    $node->field_imported_date[LANGUAGE_NONE][0]['value']) / 9000);
 
 //   $relevance_decay = (int) ((time() - $node->published_at) / 3600);
 
@@ -209,14 +257,12 @@ function feeds_article_score($node) {
     ),
   );
 
-// save section
-
+  // save section
   $section_tids = array_values(
     taxonomy_get_term_by_name($relevance_section, 'sections')
   );
 
-  if (count($section_tids) > 0) {
-
+  if (count($section_tids) > 0)
     $node->field_section = array(
       LANGUAGE_NONE => array(
         0 => array(
@@ -224,41 +270,17 @@ function feeds_article_score($node) {
         ),
       ),
     );
-  }
 
-
-// save URL
-
-  $node->field_more_info_link = $node->field_imported_url;
-
-// save title
-
+  // save title
   $node->title = strip_tags(
     $node->field_imported_title[LANGUAGE_NONE][0]['value'], ''
   );
 
-// delete log
-
+  // delete log
   $node->log = 'Scored';
   $node->field_rescore = array();
 
-// save body
-
-  $node->body = array(
-      LANGUAGE_NONE => array(
-        0 => array(
-          'value' => filter_xss(
-            decode_entities(
-              @$node->field_imported_description[LANGUAGE_NONE][0]['value']
-            ),
-            $allowed_tags),
-          'format' => 'limited_html',
-        ),
-      ),
-    );
-
-// publish or promote?
-
+  // publish or promote?
   if ($relevance > variable_get('score_to_publish', 10)) $node->status = 1;
   $node->promote = ($score > variable_get('score_to_promote', 10)) ? 1 : 0;
 
@@ -338,7 +360,7 @@ function feeds_article_rescore($all = FALSE) {
 
     foreach ($articles as $node) {
 
-      feeds_article_score($node);
+      feeds_article_score_node($node);
       $pub += $node->status;
       $prom += $node->promote;
       ($node->field_score[LANGUAGE_NONE][0]['value'] > 0) && $pos++;
@@ -458,5 +480,73 @@ function feeds_article_query_published_in_last_four_days_alter($query) {
 
   $query->join('publication_date', 'pd', '%alias.nid = node.nid');
   $query->condition('pd.published_at', time() - 345600000, '>');
+
+}
+
+
+/**
+ * Retrieve a URL from the Internet and heavily-santize it.
+ *
+ * @param string $url
+ *   The URL to grab.
+ *
+ * @return object
+ *   The title, description, deck, and body text of the URL
+ */
+function feeds_article_get_url($url) {
+
+  $text = file_get_contents($url);
+
+  // Strip off scripts, CSS, and most tags
+  $text = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $text);
+  $text = preg_replace('/<style\b[^>]*>(.*?)<\/style>/is', '', $text);
+  $text = strip_tags($text, '<h1><h2><h3><p><a><strong><meta>');
+// $text = str_replace(array("[\t\r\n]+"),"",$text);
+// $text = trim($text);
+
+/* // run it through HTMLPurifier
+  require_once libraries_get_path('htmlpurifier')
+  . '/library/HTMLPurifier.auto.php';
+  $config = HTMLPurifier_Config::createDefault();
+  $purifier = new HTMLPurifier($config);
+  $text = $purifier->purify($text);
+// */
+
+  $html = new DOMDocument();
+  @$html->loadHTML($text);
+  $doc = new StdClass();
+  $doc->text = '';
+
+  foreach ($html->getElementsByTagName('meta') as $meta) {
+    if ($meta->getAttribute('property')=='og:title')
+      $doc->title = $meta->getAttribute('content');
+    if ($meta->getAttribute('property')=='og:description')
+      $doc->description = $meta->getAttribute('content');
+  }
+
+  $nodes = array();
+  $limit = 0;
+  $last_text = '';
+
+  foreach($html->getElementsByTagName('*') as $tag) {
+
+    if ($tag->nodeName == 'h1') {
+      $limit = 12;
+    } else if ($limit > 0 && strlen($tag->nodeValue) > 20 ) {
+
+      if (!in_array($tag->nodeName, array('p', 'div', 'strong', 'h2')))
+        continue;
+      if (stripos($tag->nodeValue, 'sponsor') !== FALSE) continue;
+      if ($tag->nodeValue == $last_text) continue;
+
+      if (empty($last_text)) $doc->deck = $tag->nodeValue;
+      else $doc->text .= '<p>' . $tag->nodeValue . '</p>';
+
+      $limit--;
+      $last_text = $tag->nodeValue;
+    }
+  }
+
+  return $doc;
 
 }

@@ -24,12 +24,14 @@ function basic_config_ds_custom_fields_info() {
       'value' => '<?php
 
   $image_uri = \'\';
+  $style = \'800x800\';
 
     if (isset($entity->field_image[LANGUAGE_NONE][0][\'uri\'])) {
 
-      $image_uri = image_style_url(\'800x800\',
-        $entity->field_image[LANGUAGE_NONE][0][\'uri\']
-      );
+      $image_uri = $section->field_images[LANGUAGE_NONE][0][\'uri\'];
+      $derivative_uri = image_style_path($style, $image_uri);
+      file_exists($derivative_uri) || image_style_create_derivative(image_style_load($style), $image_uri, $derivative_uri);
+      $image_uri  = file_create_url($derivative_uri);
 
     }
 
@@ -46,9 +48,11 @@ function basic_config_ds_custom_fields_info() {
           $num_images = count($section->field_images[LANGUAGE_NONE]);
           $node_hash = intval(substr(md5($entity->title), -7), 16);
           $rand_key = ($node_hash % $num_images);
-          $image_uri = image_style_url(\'800x800\',
-            $section->field_images[LANGUAGE_NONE][$rand_key][\'uri\']
-          );
+
+          $image_uri = $section->field_images[LANGUAGE_NONE][$rand_key][\'uri\'];
+          $derivative_uri = image_style_path($style, $image_uri);
+          file_exists($derivative_uri) || image_style_create_derivative(image_style_load($style), $image_uri, $derivative_uri);
+          $image_uri  = file_create_url($derivative_uri);
 
         }
 

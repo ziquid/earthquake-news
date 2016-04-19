@@ -1,5 +1,5 @@
-name = Fitness Bootstrap LESS theme
-description = Bootstrap Framework LESS theme for FitnessNe.ws
+name = Earthquake News theme
+description = Bootstrap Framework LESS theme for EarthQuakeNe.ws
 core = 7.x
 base theme = bootstrap
 

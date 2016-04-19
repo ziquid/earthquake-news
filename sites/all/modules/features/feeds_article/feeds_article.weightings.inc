@@ -13,20 +13,10 @@ function feeds_articles_get_weightings() {
 
   $weightings = array(
     'base' => array(
-      'active' => 2,
-      'athlete' => 2,
-      'athletes' => 2,
-      'class' => 1,
-      'classes' => 1,
-      'energy' => 3,
-      'exercise' => 3,
-      'exercises' => 3,
-      'fitness' => 3,
-      'gym' => 3,
-      'shape' => 1,
-      'self-defense' => 3,
-      'trainer' => 3,
-      'training' => 3,
+      'earthquake' => 3,
+      'earthquakes' => 3,
+      'quake' => 3,
+      'quakes' => 3,
 
 
       'a-hole' => -100,
@@ -41,7 +31,9 @@ function feeds_articles_get_weightings() {
     )
   );
 
+  $weightings['Quakes'] = $weightings['base'];
 
+/*
   $weightings['cardio-base'] = array(
     'metabolism' => 3,
     'pace' => 3,
@@ -245,7 +237,7 @@ function feeds_articles_get_weightings() {
     'snoring' => 3,
   ) + $weightings['base'];
 
-
+*/
   unset($weightings['base'], $weightings['cardio-base']);
 
   return $weightings;
