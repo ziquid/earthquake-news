@@ -156,10 +156,9 @@ function feeds_article_field_group_info() {
     'label' => 'Text',
     'weight' => '2',
     'children' => array(
-      0 => 'body',
-      1 => 'field_deck',
-      2 => 'field_section',
-      3 => 'title',
+      0 => 'field_deck',
+      1 => 'field_section',
+      2 => 'title',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(

@@ -137,20 +137,18 @@ function feeds_article_ds_layout_settings_info() {
     'regions' => array(
       'ds_content' => array(
         0 => 'image_or_section_image',
-        1 => 'group_text_front_page_text',
-        2 => 'field_section',
+        1 => 'field_section',
+        2 => 'group_text_front_page_text',
         3 => 'title',
         4 => 'field_deck',
-        5 => 'body',
       ),
     ),
     'fields' => array(
       'image_or_section_image' => 'ds_content',
-      'group_text_front_page_text' => 'ds_content',
       'field_section' => 'ds_content',
+      'group_text_front_page_text' => 'ds_content',
       'title' => 'ds_content',
       'field_deck' => 'ds_content',
-      'body' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -161,6 +159,7 @@ function feeds_article_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
   );
   $export['node|article|front_page'] = $ds_layout;
 

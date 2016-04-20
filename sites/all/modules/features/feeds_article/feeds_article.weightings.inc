@@ -13,12 +13,27 @@ function feeds_articles_get_weightings() {
 
   $weightings = array(
     'base' => array(
+      'aftershock' => 3,
+      'aftershocks' => 3,
       'earthquake' => 3,
       'earthquakes' => 3,
+      'epicenter' => 3,
+      'magnitude' => 3,
       'quake' => 3,
       'quakes' => 3,
       'seismic' => 3,
 
+      'aftermath' => 2,
+      'casualties' => 2,
+      'damage' => 2,
+      'damaged' => 2,
+      'death toll' => 2,
+      'debris' => 1,
+      'destroy' => 1,
+      'destroyed' => 1,
+      'landslide' => 2,
+      'survivors' => 2,
+      'tsunami' => 2,
 
       'a-hole' => -100,
       'b\*tch' => -100,
@@ -33,6 +48,14 @@ function feeds_articles_get_weightings() {
   );
 
   $weightings['Quakes'] = $weightings['base'];
+
+  $weightings['Japan'] = array(
+    'Japan' => 3,
+  ) + $weightings['Quakes'];
+
+  $weightings['Ecuador'] = array(
+    'Ecuador' => 3,
+  ) + $weightings['Quakes'];
 
 /*
   $weightings['cardio-base'] = array(
