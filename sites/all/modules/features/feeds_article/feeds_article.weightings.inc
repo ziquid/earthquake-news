@@ -17,6 +17,7 @@ function feeds_articles_get_weightings() {
       'earthquakes' => 3,
       'quake' => 3,
       'quakes' => 3,
+      'seismic' => 3,
 
 
       'a-hole' => -100,

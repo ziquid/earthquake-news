@@ -10,7 +10,7 @@
 function feeds_article_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-article-body'
+  // Exported field_instance: 'node-article-body'.
   $field_instances['node-article-body'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -92,7 +92,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_deck'
+  // Exported field_instance: 'node-article-field_deck'.
   $field_instances['node-article-field_deck'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -170,7 +170,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_highest_relevance'
+  // Exported field_instance: 'node-article-field_highest_relevance'.
   $field_instances['node-article-field_highest_relevance'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -216,7 +216,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_highest_relevance_section'
+  // Exported field_instance: 'node-article-field_highest_relevance_section'.
   $field_instances['node-article-field_highest_relevance_section'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -291,7 +291,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_image'
+  // Exported field_instance: 'node-article-field_image'.
   $field_instances['node-article-field_image'] = array(
     'bundle' => 'article',
     'deleted' => 0,
@@ -356,7 +356,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_author'
+  // Exported field_instance: 'node-article-field_imported_author'.
   $field_instances['node-article-field_imported_author'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -428,7 +428,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_categories'
+  // Exported field_instance: 'node-article-field_imported_categories'.
   $field_instances['node-article-field_imported_categories'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -499,7 +499,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_date'
+  // Exported field_instance: 'node-article-field_imported_date'.
   $field_instances['node-article-field_imported_date'] = array(
     'bundle' => 'article',
     'deleted' => 0,
@@ -514,6 +514,7 @@ function feeds_article_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 31,
@@ -558,7 +559,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_description'
+  // Exported field_instance: 'node-article-field_imported_description'.
   $field_instances['node-article-field_imported_description'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -633,7 +634,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_geo_locations'
+  // Exported field_instance: 'node-article-field_imported_geo_locations'.
   $field_instances['node-article-field_imported_geo_locations'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -704,7 +705,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_guid'
+  // Exported field_instance: 'node-article-field_imported_guid'.
   $field_instances['node-article-field_imported_guid'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -775,7 +776,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_node_id'
+  // Exported field_instance: 'node-article-field_imported_node_id'.
   $field_instances['node-article-field_imported_node_id'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -846,7 +847,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_published_date'
+  // Exported field_instance: 'node-article-field_imported_published_date'.
   $field_instances['node-article-field_imported_published_date'] = array(
     'bundle' => 'article',
     'deleted' => 0,
@@ -898,7 +899,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_source_link'
+  // Exported field_instance: 'node-article-field_imported_source_link'.
   $field_instances['node-article-field_imported_source_link'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -961,7 +962,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_title'
+  // Exported field_instance: 'node-article-field_imported_title'.
   $field_instances['node-article-field_imported_title'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -1032,7 +1033,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_url'
+  // Exported field_instance: 'node-article-field_imported_url'.
   $field_instances['node-article-field_imported_url'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -1065,6 +1066,8 @@ function feeds_article_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
+          'deck_html' => 0,
+          'ds_code' => 0,
           'full_html' => 'full_html',
           'limited_html' => 'limited_html',
           'php_code' => 'php_code',
@@ -1074,6 +1077,12 @@ function feeds_article_field_default_field_instances() {
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'deck_html' => array(
+              'weight' => 0,
+            ),
+            'ds_code' => array(
+              'weight' => 12,
+            ),
             'full_html' => array(
               'weight' => 0,
             ),
@@ -1103,7 +1112,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_imported_user_id'
+  // Exported field_instance: 'node-article-field_imported_user_id'.
   $field_instances['node-article-field_imported_user_id'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -1174,7 +1183,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_more_info_link'
+  // Exported field_instance: 'node-article-field_more_info_link'.
   $field_instances['node-article-field_more_info_link'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -1209,6 +1218,7 @@ function feeds_article_field_default_field_instances() {
       'better_formats' => array(
         'allowed_formats' => array(
           'deck_html' => 'deck_html',
+          'ds_code' => 0,
           'full_html' => 'full_html',
           'limited_html' => 'limited_html',
           'php_code' => 'php_code',
@@ -1220,6 +1230,9 @@ function feeds_article_field_default_field_instances() {
           'formats' => array(
             'deck_html' => array(
               'weight' => 0,
+            ),
+            'ds_code' => array(
+              'weight' => 12,
             ),
             'full_html' => array(
               'weight' => 0,
@@ -1250,7 +1263,468 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_relevance_log'
+  // Exported field_instance: 'node-article-field_pulled_body'.
+  $field_instances['node-article-field_pulled_body'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 36,
+      ),
+      'front_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pulled_body',
+    'label' => 'Pulled Body',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'deck_html' => 0,
+          'ds_code' => 0,
+          'full_html' => 0,
+          'limited_html' => 'limited_html',
+          'php_code' => 0,
+          'plain_text' => 0,
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'deck_html' => array(
+              'weight' => 0,
+            ),
+            'ds_code' => array(
+              'weight' => 12,
+            ),
+            'full_html' => array(
+              'weight' => 0,
+            ),
+            'limited_html' => array(
+              'weight' => 0,
+            ),
+            'php_code' => array(
+              'weight' => 11,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_pulled_date'.
+  $field_instances['node-article-field_pulled_date'] = array(
+    'bundle' => 'article',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 37,
+      ),
+      'front_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pulled_date',
+    'label' => 'Pulled Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_pulled_deck'.
+  $field_instances['node-article-field_pulled_deck'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 34,
+      ),
+      'front_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pulled_deck',
+    'label' => 'Pulled Deck',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'deck_html' => 'deck_html',
+          'ds_code' => 'ds_code',
+          'full_html' => 'full_html',
+          'limited_html' => 'limited_html',
+          'php_code' => 'php_code',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'deck_html' => array(
+              'weight' => 0,
+            ),
+            'ds_code' => array(
+              'weight' => 12,
+            ),
+            'full_html' => array(
+              'weight' => 0,
+            ),
+            'limited_html' => array(
+              'weight' => 0,
+            ),
+            'php_code' => array(
+              'weight' => 11,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 19,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_pulled_description'.
+  $field_instances['node-article-field_pulled_description'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 35,
+      ),
+      'front_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pulled_description',
+    'label' => 'Pulled Description',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'deck_html' => 'deck_html',
+          'ds_code' => 'ds_code',
+          'full_html' => 'full_html',
+          'limited_html' => 'limited_html',
+          'php_code' => 'php_code',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'deck_html' => array(
+              'weight' => 0,
+            ),
+            'ds_code' => array(
+              'weight' => 12,
+            ),
+            'full_html' => array(
+              'weight' => 0,
+            ),
+            'limited_html' => array(
+              'weight' => 0,
+            ),
+            'php_code' => array(
+              'weight' => 11,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_pulled_title'.
+  $field_instances['node-article-field_pulled_title'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 33,
+      ),
+      'front_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pulled_title',
+    'label' => 'Pulled Title',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'deck_html' => 'deck_html',
+          'ds_code' => 'ds_code',
+          'full_html' => 'full_html',
+          'limited_html' => 'limited_html',
+          'php_code' => 'php_code',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'deck_html' => array(
+              'weight' => 0,
+            ),
+            'ds_code' => array(
+              'weight' => 12,
+            ),
+            'full_html' => array(
+              'weight' => 0,
+            ),
+            'limited_html' => array(
+              'weight' => 0,
+            ),
+            'php_code' => array(
+              'weight' => 11,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 17,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_pulled_url'.
+  $field_instances['node-article-field_pulled_url'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 32,
+      ),
+      'front_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pulled_url',
+    'label' => 'Pulled URL',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'deck_html' => 'deck_html',
+          'ds_code' => 'ds_code',
+          'full_html' => 'full_html',
+          'limited_html' => 'limited_html',
+          'php_code' => 'php_code',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'deck_html' => array(
+              'weight' => 0,
+            ),
+            'ds_code' => array(
+              'weight' => 12,
+            ),
+            'full_html' => array(
+              'weight' => 0,
+            ),
+            'limited_html' => array(
+              'weight' => 0,
+            ),
+            'php_code' => array(
+              'weight' => 11,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 15,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-field_relevance_log'.
   $field_instances['node-article-field_relevance_log'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -1325,7 +1799,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_rescore'
+  // Exported field_instance: 'node-article-field_rescore'.
   $field_instances['node-article-field_rescore'] = array(
     'bundle' => 'article',
     'default_value' => array(
@@ -1373,7 +1847,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_score'
+  // Exported field_instance: 'node-article-field_score'.
   $field_instances['node-article-field_score'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -1419,7 +1893,7 @@ function feeds_article_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_section'
+  // Exported field_instance: 'node-article-field_section'.
   $field_instances['node-article-field_section'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -1484,6 +1958,12 @@ function feeds_article_field_default_field_instances() {
   t('Imported URL');
   t('Imported User ID');
   t('More Info Link');
+  t('Pulled Body');
+  t('Pulled Date');
+  t('Pulled Deck');
+  t('Pulled Description');
+  t('Pulled Title');
+  t('Pulled URL');
   t('Relevance Log');
   t('Rescore');
   t('Score');

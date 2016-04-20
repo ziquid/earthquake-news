@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function feeds_article_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -40,7 +40,7 @@ function feeds_article_field_group_info() {
       ),
     ),
   );
-  $export['group_byline|node|article|default'] = $field_group;
+  $field_groups['group_byline|node|article|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -53,7 +53,7 @@ function feeds_article_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Generated Data',
-    'weight' => '9',
+    'weight' => '10',
     'children' => array(
       0 => 'field_highest_relevance',
       1 => 'field_highest_relevance_section',
@@ -69,7 +69,7 @@ function feeds_article_field_group_info() {
       ),
     ),
   );
-  $export['group_generated_data|node|article|form'] = $field_group;
+  $field_groups['group_generated_data|node|article|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -86,17 +86,16 @@ function feeds_article_field_group_info() {
     'children' => array(
       0 => 'field_imported_author',
       1 => 'field_imported_categories',
-      2 => 'field_imported_description',
-      3 => 'field_imported_geo_locations',
-      4 => 'field_imported_guid',
-      5 => 'field_imported_node_id',
-      6 => 'field_imported_published_date',
-      7 => 'field_imported_title',
-      8 => 'field_imported_url',
-      9 => 'field_imported_user_id',
-      10 => 'field_imported_source',
-      11 => 'field_imported_source_link',
-      12 => 'field_imported_date',
+      2 => 'field_imported_date',
+      3 => 'field_imported_description',
+      4 => 'field_imported_geo_locations',
+      5 => 'field_imported_guid',
+      6 => 'field_imported_node_id',
+      7 => 'field_imported_published_date',
+      8 => 'field_imported_source_link',
+      9 => 'field_imported_title',
+      10 => 'field_imported_url',
+      11 => 'field_imported_user_id',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -109,7 +108,40 @@ function feeds_article_field_group_info() {
       'formatter' => 'collapsible',
     ),
   );
-  $export['group_imported_data|node|article|form'] = $field_group;
+  $field_groups['group_imported_data|node|article|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_pulled_data|node|article|form';
+  $field_group->group_name = 'group_pulled_data';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'article';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Pulled Data',
+    'weight' => '9',
+    'children' => array(
+      0 => 'field_pulled_url',
+      1 => 'field_pulled_title',
+      2 => 'field_pulled_deck',
+      3 => 'field_pulled_description',
+      4 => 'field_pulled_body',
+      5 => 'field_pulled_date',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-pulled-data field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_pulled_data|node|article|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -147,7 +179,15 @@ function feeds_article_field_group_info() {
       'formatter' => 'collapsible',
     ),
   );
-  $export['group_text_front_page_text|node|article|front_page'] = $field_group;
+  $field_groups['group_text_front_page_text|node|article|front_page'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Byline');
+  t('Generated Data');
+  t('Imported Data');
+  t('Pulled Data');
+  t('Text');
+
+  return $field_groups;
 }
