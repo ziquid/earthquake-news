@@ -43,15 +43,16 @@ body.front div.view-top-5-articles.view-display-id-page_1 div.views-row-1 div.no
 
 
 */
-body.front div.node-article div.group-text-front-page-text {
+body.front div.node-article div.group-text-front-page-text,
+body.page-taxonomy-term div.node-article div.group-text-section-pages-text {
   position: absolute;
   bottom: 0px;
   text-align: center;
   overflow: hidden;
   margin: 0;
   max-height: 300px;
-  width: 100%;
-  background-color: rgba(30, 55, 35, 0.6);
+  width: calc(~'100% - 16px');
+  background-color: rgba(38, 32, 35, 0.71);
   border-radius: 8px 8px 0 0;
   padding: 0px 8px 11px 8px;
 }
@@ -208,7 +209,8 @@ div.ad h2 {
 
 // */
 
-.view-top-5-articles {
+.view-top-5-articles,
+.view-taxonomy-term {
   .panel.col-sm-8 {
     margin-bottom: 10px;
   }
@@ -217,9 +219,15 @@ div.ad h2 {
   }
   a {
     text-decoration: none;
-    color: #dda;
+    color: #fef4f8;
   }
   .field-name-field-deck, .field-name-body {
-    color: #cc9;
+    color: #dad4d8;
+    .hidden-xs();
+    .hidden-sm();
   }
+}
+
+.view > .text-center {
+  clear: both;
 }

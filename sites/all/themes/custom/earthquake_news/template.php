@@ -96,4 +96,14 @@ function earthquake_news_preprocess_views_view_unformatted(&$vars) {
     foreach ($rows as $id => $row)
       $vars['classes_array'][$id] .= ' col-xs-6 col-sm-4 panel';
 
+  if ($view->name == 'taxonomy_term' && $view->current_display == 'page')
+    foreach ($rows as $id => $row) {
+
+      $vars['classes_array'][$id] .=
+        ($id == 0 ? ' col-xs-12 col-sm-8' : ' col-xs-6 col-sm-4')
+        . ' panel';
+
+    }
+
+
 }

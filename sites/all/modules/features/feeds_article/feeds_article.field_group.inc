@@ -180,6 +180,37 @@ function feeds_article_field_group_info() {
   );
   $field_groups['group_text_front_page_text|node|article|front_page'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_text_section_pages_text|node|article|section_pages';
+  $field_group->group_name = 'group_text_section_pages_text';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'article';
+  $field_group->mode = 'section_pages';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Text',
+    'weight' => '1',
+    'children' => array(
+      0 => 'field_deck',
+      1 => 'title',
+    ),
+    'format_type' => 'html-element',
+    'format_settings' => array(
+      'label' => 'Text',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'group-text-section-pages-text field-group-html-element',
+        'element' => 'div',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'attributes' => '',
+      ),
+    ),
+  );
+  $field_groups['group_text_section_pages_text|node|article|section_pages'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Byline');

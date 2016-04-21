@@ -135,6 +135,9 @@ function feeds_article_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'section_pages' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -228,6 +231,15 @@ function feeds_article_strongarm() {
   $strongarm->name = 'site_frontpage';
   $strongarm->value = 'home';
   $export['site_frontpage'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'views_defaults';
+  $strongarm->value = array(
+    'taxonomy_term' => FALSE,
+  );
+  $export['views_defaults'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
