@@ -17,8 +17,13 @@ function feeds_article_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'comments' => array(
+    'more_info_link_as_link' => array(
       'weight' => '5',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'comments' => array(
+      'weight' => '6',
       'label' => 'hidden',
       'format' => 'default',
     ),
@@ -122,10 +127,10 @@ function feeds_article_ds_layout_settings_info() {
         0 => 'group_byline',
         1 => 'field_imported_source_link',
         2 => 'field_deck',
-        3 => 'field_imported_author',
-        4 => 'body',
-        5 => 'field_more_info_link',
-        6 => 'post_date',
+        3 => 'body',
+        4 => 'field_imported_author',
+        5 => 'post_date',
+        6 => 'more_info_link_as_link',
         7 => 'comments',
       ),
     ),
@@ -133,10 +138,10 @@ function feeds_article_ds_layout_settings_info() {
       'group_byline' => 'ds_content',
       'field_imported_source_link' => 'ds_content',
       'field_deck' => 'ds_content',
-      'field_imported_author' => 'ds_content',
       'body' => 'ds_content',
-      'field_more_info_link' => 'ds_content',
+      'field_imported_author' => 'ds_content',
       'post_date' => 'ds_content',
+      'more_info_link_as_link' => 'ds_content',
       'comments' => 'ds_content',
     ),
     'classes' => array(),

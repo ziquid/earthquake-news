@@ -69,6 +69,13 @@ function basic_config_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'ds_extras_field_template';
+  $strongarm->value = 1;
+  $export['ds_extras_field_template'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'exif_custom_checks';
   $strongarm->value = array(
     'auto-import' => 'auto-import',
@@ -418,7 +425,7 @@ function basic_config_strongarm() {
     'bootstrap_table_responsive' => 1,
     'bootstrap_breadcrumb' => '1',
     'bootstrap_breadcrumb_home' => 0,
-    'bootstrap_breadcrumb_title' => 1,
+    'bootstrap_breadcrumb_title' => 0,
     'bootstrap_navbar_position' => '',
     'bootstrap_navbar_inverse' => 0,
     'bootstrap_pager_first_and_last' => 1,

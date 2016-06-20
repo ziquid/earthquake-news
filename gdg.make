@@ -3,7 +3,7 @@ core = 7.x
 api = 2
 
 ; Core
-projects[drupal][version] = "7.43"
+projects[drupal][version] = "7.44"
 
 ; Modules
 projects[admin_menu][subdir] = "contrib"
@@ -62,7 +62,7 @@ projects[draggableviews][subdir] = "contrib"
 projects[draggableviews][version] = "2.1"
 
 projects[ds][subdir] = "contrib"
-projects[ds][version] = "2.13"
+projects[ds][version] = "2.14"
 
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.7"
@@ -74,7 +74,7 @@ projects[exif_custom][subdir] = "contrib"
 projects[exif_custom][version] = "1.14"
 
 projects[features][subdir] = "contrib"
-projects[features][version] = "2.9"
+projects[features][version] = "2.10"
 
 projects[feeds][subdir] = "contrib"
 projects[feeds][version] = "2.0-beta2"
@@ -95,7 +95,7 @@ projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.5"
 
 projects[file_entity][subdir] = "contrib"
-projects[file_entity][version] = "2.0-beta2"
+projects[file_entity][version] = "2.0-beta3"
 
 projects[fontyourface][subdir] = "contrib"
 projects[fontyourface][version] = "2.8"
@@ -104,7 +104,7 @@ projects[geshifilter][subdir] = "contrib"
 projects[geshifilter][version] = "1.2"
 
 projects[google_analytics][subdir] = "contrib"
-projects[google_analytics][version] = "2.1"
+projects[google_analytics][version] = "2.2"
 
 projects[globalredirect][subdir] = "contrib"
 projects[globalredirect][version] = "1.5"
@@ -122,7 +122,7 @@ projects[job_scheduler][subdir] = "contrib"
 projects[job_scheduler][version] = "2.0-alpha3"
 
 projects[libraries][subdir] = "contrib"
-projects[libraries][version] = "2.2"
+projects[libraries][version] = "2.3"
 
 projects[lightbox2][subdir] = "contrib"
 projects[lightbox2][version] = "1.0-beta1"
@@ -140,13 +140,13 @@ projects[master][subdir] = "contrib"
 projects[master][version] = "2.0-beta4"
 
 projects[media][subdir] = "contrib"
-projects[media][version] = "2.0-beta1"
+projects[media][version] = "2.0-beta2"
 
 projects[menu_trail_by_path][subdir] = "contrib"
 projects[menu_trail_by_path][version] = "2.0"
 
 projects[metatag][subdir] = "contrib"
-projects[metatag][version] = "1.14"
+projects[metatag][version] = "1.16"
 
 projects[multiform][subdir] = "contrib"
 projects[multiform][version] = "1.1"
@@ -208,13 +208,13 @@ projects[video_embed_field][subdir] = "contrib"
 projects[video_embed_field][version] = "2.0-beta11"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.13"
+projects[views][version] = "3.14"
 
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.2"
 
 projects[xmlsitemap][subdir] = "contrib"
-projects[xmlsitemap][version] = "2.2"
+projects[xmlsitemap][version] = "2.3"
 
 ; Themes
 ; Please fill the following out. Type may be one of get, git, bzr or svn,

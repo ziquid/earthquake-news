@@ -70,5 +70,28 @@ function basic_config_ds_custom_fields_info() {
   );
   $export['image_or_section_image'] = $ds_field;
 
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'more_info_link_as_link';
+  $ds_field->label = 'More Info Link as Link';
+  $ds_field->field_type = 5;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'article|*';
+  $ds_field->properties = array(
+    'code' => array(
+      'value' => '<?php
+  print l(t(\'Read the rest of the article\'),
+    $entity->field_more_info_link[LANGUAGE_NONE][0][\'safe_value\'],
+    array(\'attributes\' => array(\'target\' => array(\'_blank\')))
+  );
+?>',
+      'format' => 'ds_code',
+    ),
+    'use_token' => 0,
+  );
+  $export['more_info_link_as_link'] = $ds_field;
+
   return $export;
 }

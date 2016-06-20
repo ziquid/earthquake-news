@@ -35,6 +35,10 @@ function feeds_articles_get_weightings() {
       'survivors' => 2,
       'tsunami' => 2,
 
+      'game' => -25,
+      'games' => -25,
+      'gameplay' => -25,
+
       'a-hole' => -100,
       'b\*tch' => -100,
       'badass' => -100,
@@ -49,12 +53,28 @@ function feeds_articles_get_weightings() {
 
   $weightings['Quakes'] = $weightings['base'];
 
-  $weightings['Japan'] = array(
-    'Japan' => 3,
+  $weightings['Ecuador'] = array(
+    'ecuador' => 3,
   ) + $weightings['Quakes'];
 
-  $weightings['Ecuador'] = array(
-    'Ecuador' => 3,
+  $weightings['Indonesia'] = array(
+    'indonesia' => 3,
+    'indonesian' => 3,
+  ) + $weightings['Quakes'];
+
+  $weightings['Japan'] = array(
+    'japan' => 3,
+    'japanese' => 3,
+  ) + $weightings['Quakes'];
+
+  $weightings['Wales'] = array(
+    'wales' => 3,
+    'welsh' => 3,
+  ) + $weightings['Quakes'];
+
+  $weightings['California'] = array(
+    'calif' => 3,
+    'california' => 3,
   ) + $weightings['Quakes'];
 
   $weightings['Preparation'] = array(
