@@ -4,6 +4,8 @@ $conf['install_profile'] = 'minimal';
 $conf['master_version'] = 2;
 $conf['master_modules'] = array(
   'base' => array(
+    'addthis',
+    'addthis_displays',
     'admin_menu_toolbar',
     'adminrole',
     'adsense',
@@ -48,6 +50,12 @@ $conf['master_modules'] = array(
     'media_wysiwyg_view_mode',
     'menu',
     'metatag',
+    'metatag_dc',
+    'metatag_facebook',
+    'metatag_google_plus',
+    'metatag_mobile',
+    'metatag_opengraph',
+    'metatag_twitter_cards',
     'multiform',
     'nice_menus',
     'noindex_external_links',

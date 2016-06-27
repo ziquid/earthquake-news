@@ -6,11 +6,14 @@ api = 2
 projects[drupal][version] = "7.44"
 
 ; Modules
+projects[addthis][subdir] = "contrib"
+projects[addthis][version] = "4.0-alpha6"
+
 projects[admin_menu][subdir] = "contrib"
 projects[admin_menu][version] = "3.0-rc5"
 
 projects[adsense][subdir] = "contrib"
-projects[adsense][version] = "1.3"
+projects[adsense][version] = "1.7"
 
 projects[adminrole][subdir] = "contrib"
 projects[adminrole][version] = "1.1"
