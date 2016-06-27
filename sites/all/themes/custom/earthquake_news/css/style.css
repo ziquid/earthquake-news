@@ -4693,7 +4693,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   padding: 3px 5px;
   margin-bottom: 20px;
   list-style: none;
-  background-color: rgba(254, 255, 255, 0.88);
+  background-color: rgba(254, 254, 254, 0.88);
   border-radius: 4px;
 }
 .breadcrumb > li {
@@ -7544,10 +7544,10 @@ body.page-taxonomy-term div.node-article div.group-text-section-pages-text {
   overflow: hidden;
   margin: 0;
   max-height: 300px;
-  width: calc(100% - 16px);
-  background-color: rgba(38, 32, 35, 0.71);
+  width: calc(100% - 14px);
+  background-color: rgba(254, 254, 254, 0.88);
   border-radius: 8px 8px 0 0;
-  padding: 0px 8px 11px 8px;
+  padding: 0px 5px 5px 5px;
 }
 /*
 
@@ -7635,7 +7635,7 @@ div.codeblock, tr.odd, tr.even {
 }
 */
 body.page-node.node-type-article #main {
-  background-color: rgba(50, 65, 55, 0.67);
+  background-color: rgba(254, 254, 254, 0.88);
   border-radius: 56px;
   margin: 22px 10px 0 0;
   padding: 0 14px 10px 20px;
@@ -7683,12 +7683,13 @@ div.ad h2 {
 }
 .view-top-5-articles h1,
 .view-taxonomy-term h1 {
-  font-size: 18px;
+  font-size: 16px;
+  margin: 5px 0 0;
 }
 .view-top-5-articles a,
 .view-taxonomy-term a {
   text-decoration: none;
-  color: #fef4f8;
+  /*     color: #fef4f8; */
 }
 .view-top-5-articles .field-name-field-deck,
 .view-taxonomy-term .field-name-field-deck,
@@ -7723,26 +7724,26 @@ div.ad h2 {
   margin-right: 0px;
   padding-left: 5px;
   padding-right: 5px;
-  background-color: rgba(254, 255, 255, 0.88);
+  background-color: rgba(254, 254, 254, 0.88);
 }
 .breadcrumb {
   margin-bottom: 6px;
 }
-h1 {
+h1.page-header {
   font-size: 30px;
-  background-color: rgba(254, 255, 255, 0.88);
+  background-color: rgba(254, 254, 254, 0.88);
   padding: 0 6px 6px;
   margin: 0 0 6px;
   border: none;
 }
 #block-system-main {
-  background-color: rgba(254, 255, 255, 0.88);
+  background-color: rgba(254, 254, 254, 0.88);
   padding: 5px;
 }
 .field-name-more-info-link-as-link {
   text-align: center;
   margin-top: 5px;
 }
-.field-name-image-or-section-image {
+.page-node .field-name-image-or-section-image {
   display: none;
 }

@@ -51,10 +51,10 @@ body.page-taxonomy-term div.node-article div.group-text-section-pages-text {
   overflow: hidden;
   margin: 0;
   max-height: 300px;
-  width: calc(~'100% - 16px');
-  background-color: rgba(38, 32, 35, 0.71);
+  width: calc(~'100% - 14px');
+  background-color: @page-bg;
   border-radius: 8px 8px 0 0;
-  padding: 0px 8px 11px 8px;
+  padding: 0px 5px 5px 5px;
 }
 /*
 
@@ -146,7 +146,7 @@ div.codeblock, tr.odd, tr.even {
 */
 
 body.page-node.node-type-article #main {
-  background-color: rgba( 50, 65, 55, 0.67);
+  background-color: @page-bg;
   border-radius: 56px;
   margin: 22px 10px 0 0;
   padding: 0 14px 10px 20px;
@@ -215,11 +215,12 @@ div.ad h2 {
     margin-bottom: 10px;
   }
   h1 {
-    font-size: 18px;
+    font-size: 16px;
+    margin: 5px 0 0;
   }
   a {
     text-decoration: none;
-    color: #fef4f8;
+/*     color: #fef4f8; */
   }
   .field-name-field-deck, .field-name-body {
     color: #dad4d8;

@@ -10,7 +10,7 @@
 function section_taxonomy_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'taxonomy_term-sections-field_images'
+  // Exported field_instance: 'taxonomy_term-sections-field_images'.
   $field_instances['taxonomy_term-sections-field_images'] = array(
     'bundle' => 'sections',
     'deleted' => 0,
@@ -67,7 +67,7 @@ function section_taxonomy_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-sections-field_term_relevance'
+  // Exported field_instance: 'taxonomy_term-sections-field_term_relevance'.
   $field_instances['taxonomy_term-sections-field_term_relevance'] = array(
     'bundle' => 'sections',
     'default_value' => NULL,

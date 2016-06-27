@@ -10,7 +10,7 @@
 function section_taxonomy_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_term_relevance'
+  // Exported field_base: 'field_term_relevance'.
   $field_bases['field_term_relevance'] = array(
     'active' => 1,
     'cardinality' => 1,
