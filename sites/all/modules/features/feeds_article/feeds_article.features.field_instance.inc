@@ -1287,7 +1287,7 @@ function feeds_article_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 15,
       ),
       'front_page' => array(
         'label' => 'above',

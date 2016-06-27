@@ -7743,3 +7743,6 @@ h1 {
   text-align: center;
   margin-top: 5px;
 }
+.field-name-image-or-section-image {
+  display: none;
+}

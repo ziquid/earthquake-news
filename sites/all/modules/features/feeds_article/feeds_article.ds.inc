@@ -17,13 +17,18 @@ function feeds_article_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'image_or_section_image' => array(
+      'weight' => '6',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'more_info_link_as_link' => array(
-      'weight' => '5',
+      'weight' => '4',
       'label' => 'hidden',
       'format' => 'default',
     ),
     'comments' => array(
-      'weight' => '6',
+      'weight' => '5',
       'label' => 'hidden',
       'format' => 'default',
     ),
@@ -31,11 +36,6 @@ function feeds_article_ds_field_settings_info() {
       'weight' => '4',
       'label' => 'hidden',
       'format' => 'ds_post_date_long',
-    ),
-    'field_imported_source_link' => array(
-      'formatter_settings' => array(
-        'ft' => array(),
-      ),
     ),
   );
   $export['node|article|default'] = $ds_fieldsetting;
@@ -132,22 +132,24 @@ function feeds_article_ds_layout_settings_info() {
         0 => 'group_byline',
         1 => 'field_imported_source_link',
         2 => 'field_deck',
-        3 => 'body',
-        4 => 'field_imported_author',
+        3 => 'field_imported_author',
+        4 => 'body',
         5 => 'post_date',
         6 => 'more_info_link_as_link',
         7 => 'comments',
+        8 => 'image_or_section_image',
       ),
     ),
     'fields' => array(
       'group_byline' => 'ds_content',
       'field_imported_source_link' => 'ds_content',
       'field_deck' => 'ds_content',
-      'body' => 'ds_content',
       'field_imported_author' => 'ds_content',
+      'body' => 'ds_content',
       'post_date' => 'ds_content',
       'more_info_link_as_link' => 'ds_content',
       'comments' => 'ds_content',
+      'image_or_section_image' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
