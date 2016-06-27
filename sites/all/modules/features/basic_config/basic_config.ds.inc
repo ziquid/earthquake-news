@@ -84,7 +84,7 @@ function basic_config_ds_custom_fields_info() {
       'value' => '<?php
   print l(t(\'Read the rest of the article\'),
     $entity->field_more_info_link[LANGUAGE_NONE][0][\'safe_value\'],
-    array(\'attributes\' => array(\'target\' => array(\'_blank\')))
+    array(\'attributes\' => array(\'target\' => array(\'_blank\'), \'rel\' => array(\'nofollow\'), \'class\' => array(\'btn\', \'btn-default\'), \'role\' => array(\'button\')))
   );
 ?>',
       'format' => 'ds_code',

@@ -32,6 +32,11 @@ function feeds_article_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'ds_post_date_long',
     ),
+    'field_imported_source_link' => array(
+      'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
   );
   $export['node|article|default'] = $ds_fieldsetting;
 
